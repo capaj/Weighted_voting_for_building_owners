@@ -35,25 +35,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Esent.Interop, Version=1.7.0.0, Culture=neutral, PublicKeyToken=8dd49bbdae3f61af, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Esent.Interop.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Esent.Interop.dll</HintPath>
     </Reference>
     <Reference Include="Fleck, Version=0.9.6.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Fleck.0.9.6.12\lib\net40\Fleck.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=efe927acf176eea2, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Lucene.Net.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.Spatial, Version=2.9.1.2, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Lucene.Net.Contrib.Spatial.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Lucene.Net.Contrib.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.SpellChecker, Version=2.9.2.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -63,34 +63,25 @@
       <HintPath>packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Client.1.0.960\lib\net40\Raven.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Backup">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Backup.exe</HintPath>
+      <HintPath>packages\RavenDB.Client.1.0.888\lib\net40\Raven.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Embedded, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Embedded.1.0.960\lib\net40\Raven.Client.Embedded.dll</HintPath>
+      <HintPath>packages\RavenDB.Embedded.1.0.888\lib\net40\Raven.Client.Embedded.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Lightweight, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Client.1.0.960\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+      <HintPath>packages\RavenDB.Client.1.0.888\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Database.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Raven.Database.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Munin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=974fec519e29970d, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Munin.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Smuggler">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Smuggler.exe</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Raven.Munin.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Storage.Esent, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Storage.Esent.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Raven.Storage.Esent.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Storage.Managed, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Raven.Storage.Managed.dll</HintPath>
-    </Reference>
-    <Reference Include="Spatial4n.Core">
-      <HintPath>packages\RavenDB.Database.1.0.960\lib\net40\Spatial4n.Core.dll</HintPath>
+      <HintPath>packages\RavenDB.Database.1.0.888\lib\net40\Raven.Storage.Managed.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -103,102 +94,6 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
-    <None Include=".git\config" />
-    <None Include=".git\description" />
-    <None Include=".git\FETCH_HEAD" />
-    <None Include=".git\HEAD" />
-    <None Include=".git\hooks\applypatch-msg.sample" />
-    <None Include=".git\hooks\commit-msg.sample" />
-    <None Include=".git\hooks\post-update.sample" />
-    <None Include=".git\hooks\pre-applypatch.sample" />
-    <None Include=".git\hooks\pre-commit.sample" />
-    <None Include=".git\hooks\pre-rebase.sample" />
-    <None Include=".git\hooks\prepare-commit-msg.sample" />
-    <None Include=".git\hooks\update.sample" />
-    <None Include=".git\index" />
-    <None Include=".git\info\exclude" />
-    <None Include=".git\line_info" />
-    <None Include=".git\logs\refs\remotes\origin\master" />
-    <None Include=".git\objects\06\e55c0b45b2d997138bd186cb1bb5788b882016" />
-    <None Include=".git\objects\08\0b495f08ccb088332a74b0002e75880e7bf145" />
-    <None Include=".git\objects\0e\8213dcb67fd56622ef0a0ac9723e3e98927465" />
-    <None Include=".git\objects\10\7026da165cd08005301963f1ef29e2f5c2d30e" />
-    <None Include=".git\objects\11\721c240e510289700d3d5a23f7196cf8da915b" />
-    <None Include=".git\objects\14\356981968b3ba0aebde060570a0cf052583413" />
-    <None Include=".git\objects\16\75a6c473ca975e04004ce8cb83fef11fd1ee51" />
-    <None Include=".git\objects\16\ad06c5acaad09ee4d6e9d7c428506db028aeeb" />
-    <None Include=".git\objects\19\c8ac8b2a19c4390deb9c7451e682992030655b" />
-    <None Include=".git\objects\1e\fb2f0f789ebcdfb0094618ebb27d04ab519f36" />
-    <None Include=".git\objects\1f\0d21e9a73a788d5108f250fb5bca75be2959a0" />
-    <None Include=".git\objects\1f\55036a0746edc369bd0354ed8756a95f30981c" />
-    <None Include=".git\objects\21\03e6d3902a84d3d8b75ba35b4609404363ce4b" />
-    <None Include=".git\objects\22\675f753ab0479b0b2a1e4e1fbf68e6618d653d" />
-    <None Include=".git\objects\33\a8b826344a99a4f184bda0f52ea005979f92bf" />
-    <None Include=".git\objects\34\8500d20eb2a6a157558bcb49199ec6c9c04d30" />
-    <None Include=".git\objects\37\74ff986139c8a7534e14bc8987fe80418dcc1b" />
-    <None Include=".git\objects\38\fd0c8468ce8a2031f1ec40e3fec0e1bf1b0e55" />
-    <None Include=".git\objects\3b\f6484a29d8da269f9bc874b25493a45fae3bae" />
-    <None Include=".git\objects\3c\19c48079531d3bf7b31953ef9b6316aa0be8bd" />
-    <None Include=".git\objects\3d\d273849e753727829da9ca9d5cb28e9ef53d37" />
-    <None Include=".git\objects\41\2eeda78dc9de1186c2e0e1526764af82ab3431" />
-    <None Include=".git\objects\42\220379a2ab912873da729b6e10bc974dfe8fe2" />
-    <None Include=".git\objects\47\95c059ddf60477b356053349e2ae2229d3dce8" />
-    <None Include=".git\objects\48\8f21033866cf2657e4a120fc3658e42e1ce6ca" />
-    <None Include=".git\objects\48\c91416989c77986e90ed450d845d6753153824" />
-    <None Include=".git\objects\57\89fff65e393def162418b2b968b3272d815ede" />
-    <None Include=".git\objects\5a\1d37d97c4be682628379d5b13e69ff5fc1c67a" />
-    <None Include=".git\objects\5d\6e65b82499fd4caa965cb7b8feb2edb6e2cd0a" />
-    <None Include=".git\objects\5e\d0163272fff9ffad51446024b383ca9eaa2f7e" />
-    <None Include=".git\objects\5f\12dabd97a53b045f3e278ab6f388bee4aabf14" />
-    <None Include=".git\objects\5f\ab8e6fc98f49eb7dc5e68cadaff7a916330256" />
-    <None Include=".git\objects\5f\d9589383b334152edef141747daeac8a92e66b" />
-    <None Include=".git\objects\64\eb506a7300ecd83b22af8b665ed9fcc9700460" />
-    <None Include=".git\objects\6b\27c3141dd12f7df6b8ecfd1dfa29131d8c49a7" />
-    <None Include=".git\objects\6b\bce6cac25713d2dc84dd75f0bc7e2bf6ee5766" />
-    <None Include=".git\objects\6f\4f1e29fd5ed87977558e303b029c1deac390dd" />
-    <None Include=".git\objects\72\46dffef676fa1912c0315303d5089847149aa6" />
-    <None Include=".git\objects\77\8fcf092bf358852e03463c10253c8fe1ae17e9" />
-    <None Include=".git\objects\78\2eeaecc39b42d75553b9bb2275b91af268de67" />
-    <None Include=".git\objects\79\882cec820421afb3a8ebc5d892be1a27a1cd55" />
-    <None Include=".git\objects\79\bc568c21395d5a5ceab62fadb04457094b2ac7" />
-    <None Include=".git\objects\7c\a7e423643f20c90c08257f6c5b2448d4be0b09" />
-    <None Include=".git\objects\80\fbbbf2044a0caa71a141743934e522a9f3e487" />
-    <None Include=".git\objects\81\a62b2cf755d648fc0ba96d30e36b2790d85745" />
-    <None Include=".git\objects\83\0a2de0471dc2cc0f9baecfcfd986a72b7b4e31" />
-    <None Include=".git\objects\8b\f6e371c88718dfe47bebc54d5e1ffcac9e089f" />
-    <None Include=".git\objects\8e\8319efd3bfeb17791dc726ca7bbf28c8b11503" />
-    <None Include=".git\objects\96\156e442359e61cc88fe607cd6548f53d050e58" />
-    <None Include=".git\objects\9c\1cea37359ac80330507acd6a0db33da28f07f9" />
-    <None Include=".git\objects\a5\f395d874b1add13b55e2fbdbc80e2271a3f666" />
-    <None Include=".git\objects\af\15b4c9c07b2931acfac2259ef9adf09a679b5d" />
-    <None Include=".git\objects\b2\94a0412ef86b55c1d1f1248a2f9c7dc23c8153" />
-    <None Include=".git\objects\b3\9dc55160d81c8ede804218bb82ec9f41c2e965" />
-    <None Include=".git\objects\b6\e5a2e6b7bb1dd6c373694b461c1e05791964cd" />
-    <None Include=".git\objects\b7\4b4546a62b43fd0c3936a0a59b1270dfb23adb" />
-    <None Include=".git\objects\b7\a7ef166010d260dd67729df2865367b5d5ca5c" />
-    <None Include=".git\objects\bb\40c85f7dc26540d3624a5941f92e0b3c68c1c2" />
-    <None Include=".git\objects\bb\466aaf9d057bb59259acb4c697d664d717025b" />
-    <None Include=".git\objects\c3\27734c792fdb9fdf56cc1e31c43250cbce7800" />
-    <None Include=".git\objects\c5\e1daefd3d7543f1caf651fcf5ee19ba23ffaf6" />
-    <None Include=".git\objects\cb\0a5704127b3da0b5b1f27622ea2ec17c46f037" />
-    <None Include=".git\objects\cc\c5893f656537f2a4c7ee8faae334c75d2c5673" />
-    <None Include=".git\objects\cd\28f7f578235f57693594d158723c8207d5111b" />
-    <None Include=".git\objects\d2\fcacdd36d089c8cb89815f8c22c550d78a6ea3" />
-    <None Include=".git\objects\dc\e37181267d7d38f9ac1eba70f81dc2f775e21b" />
-    <None Include=".git\objects\de\38ad017389b392d4f3706a06063e7a746b794d" />
-    <None Include=".git\objects\df\3e6b026d7543d731f362071ca9d8862c8b0c5b" />
-    <None Include=".git\objects\df\6decd16fb08d7f8fe0267724c9d135a5bc71a7" />
-    <None Include=".git\objects\e1\e36f0c7f34b8026a9ee842c1870f4d918a9b6f" />
-    <None Include=".git\objects\e2\7cf31ade5ab5a59d3574afd4fee8932b3e7ab8" />
-    <None Include=".git\objects\e7\a33e06eb5f2996ab80be0d686b5981d319aaba" />
-    <None Include=".git\objects\ee\5bec9232b10e29fbec365d0b2eda26310ea176" />
-    <None Include=".git\objects\f1\e0b574df08b0a94d9f8260ace5315f3dc5d357" />
-    <None Include=".git\objects\f4\29c40194b2f69a5bbc2b2acaaa5f53e6e579b5" />
-    <None Include=".git\objects\f9\cf497214495da368599aeedb2e16ec5bf1a0ce" />
-    <None Include=".git\objects\fb\c915b9f96f485889a3cd5b4c9f42d866fa1898" />
-    <None Include=".git\ORIG_HEAD" />
-    <None Include=".git\refs\heads\master" />
-    <None Include=".git\refs\remotes\origin\master" />
     <None Include="packages.config" />
     <None Include="voting_server\app.config" />
     <None Include="voting_server\bin\Debug\A3E7C.pfx" />
@@ -233,7 +128,6 @@
     <Compile Include="voting_server\WebsocketMessage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Raven.Studio.xap" />
     <Content Include="voting_server\bin\Debug\AsyncCtpLibrary.dll" />
     <Content Include="voting_server\bin\Debug\AsyncCtpLibrary.xml" />
     <Content Include="voting_server\bin\Debug\BouncyCastle.Crypto.dll" />
@@ -291,38 +185,8 @@
     <Content Include="voting_server\obj\x86\Debug\ownersVotingServer.pdb" />
     <Content Include="voting_server\ownersVotingServer.csproj" />
     <Content Include="voting_server\ownersVotingServer.csproj.user" />
-    <Content Include="web\css\bootstrap-responsive.css" />
-    <Content Include="web\css\bootstrap-responsive.min.css" />
-    <Content Include="web\css\bootstrap.css" />
-    <Content Include="web\css\bootstrap.min.css" />
-    <Content Include="web\css\datepicker.css" />
-    <Content Include="web\img\glyphicons-halflings-white.png" />
-    <Content Include="web\img\glyphicons-halflings.png" />
-    <Content Include="web\index.html" />
-    <Content Include="web\js\bootstrap-collapse.js" />
-    <Content Include="web\js\bootstrap-datepicker.js" />
-    <Content Include="web\js\bootstrap-modal.js" />
-    <Content Include="web\js\bootstrap-scrollspy.js" />
-    <Content Include="web\js\bootstrap.js" />
-    <Content Include="web\js\bootstrap.min.js" />
-    <Content Include="web\Scripts\BuildingOwnersVM.js" />
-    <Content Include="web\Scripts\jquery-1.7.2-vsdoc.js" />
-    <Content Include="web\Scripts\jquery-1.7.2.js" />
-    <Content Include="web\Scripts\jquery-1.7.2.min.js" />
-    <Content Include="web\Scripts\knockout-2.1.0.debug.js" />
-    <Content Include="web\Scripts\knockout-2.1.0.js" />
-    <Content Include="web\Scripts\knockout.mapping-latest.debug.js" />
-    <Content Include="web\Scripts\knockout.mapping-latest.js" />
-    <Content Include="web\Scripts\sha-1.js" />
-    <Content Include="web\Scripts\simpleKOandWS.js" />
-    <Content Include="web\Scripts\viewModel.js" />
-    <Content Include="web\styles.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include=".git\branches\" />
-    <Folder Include=".git\objects\info\" />
-    <Folder Include=".git\objects\pack\" />
-    <Folder Include=".git\refs\tags\" />
     <Folder Include="solution\" />
     <Folder Include="voting_server\bin\Debug\Data\IndexDefinitions\TemporaryIndexDefinitionsAsSource\" />
     <Folder Include="voting_server\bin\Debug\Data\Indexes\" />
