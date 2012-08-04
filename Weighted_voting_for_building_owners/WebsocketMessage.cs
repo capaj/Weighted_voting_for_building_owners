@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Fleck;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace OwnersVotingServer
 {
@@ -14,7 +15,7 @@ namespace OwnersVotingServer
 
         public void Send(IWebSocketConnection connectionToRecipient)
         {
-            connectionToRecipient.Send(JsonConvert.SerializeObject(this));
+            connectionToRecipient.Send(JsonConvert.SerializeObject(this, new IsoDateTimeConverter()));
         }
     }
 

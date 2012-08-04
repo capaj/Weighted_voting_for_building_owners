@@ -1,7 +1,7 @@
 ﻿/// <reference path= "knockout.debug.js" />
 /* File Created: května 22, 2012 */
 function GetDateStrFromJsonDate(jsonDate) {
-    var date = new Date(parseInt(jsonDate.substr(6)));
+    var date = new Date(jsonDate);
     return GetDateStrFromDate(date);
 }
 
@@ -112,18 +112,19 @@ $(function () {
                 }
             )
         );
+        //taking care of the input fields
         $('#dpicker').attr("value", "");
         VM.newMeetingName("");
         VM.newMeetingMaximumVoteCount(0);
     };
 
     VM.CreateNewVoting = function () {
-        var newVoting =
+        var newVoting = new Voting(
             {
                 subject: VM.newVotingSubject(),
-                enteredOn: new Date(),
+                enteredOn: (new Date()).toJSON(),
                 votes: []
-            };
+            });
         VM.AllMeetings()[VM.selectedMeetingIndex()].votings.push(ko.mapping.fromJS(newVoting));
     };
 
@@ -269,10 +270,10 @@ $(function () {
     });
 
     VM.positiveVotesCount = ko.computed(function () {
-        var ret = 99;
-        //ko.utils.arrayForEach(VM.positiveVotes(), function (item) {
-        //    ret = ret + parseInt(item.voteStrength());
-        //});
+        var ret = 0;
+        ko.utils.arrayForEach(VM.positiveVotes(), function (item) {
+            ret = ret + parseInt(item.voteStrength());
+        });
         return ret;
     });
 
