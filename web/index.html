@@ -1,0 +1,244 @@
+﻿<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <title> Knockout exercises</title>
+   <!-- <script src="Scripts/jquery-1.7.2-vsdoc.js" type="text/javascript"></script> 
+    <link href="styles.css" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css" />
+    <script src="Scripts/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="Scripts/knockout-2.1.0.debug.js" type="text/javascript"></script>
+    <script src="Scripts/knockout.mapping-latest.debug.js" type="text/javascript"></script>
+    <script src="Scripts/sha-1.js" type="text/javascript"></script>
+    <script src="Scripts/BuildingOwnersVM.js" type="text/javascript"></script>
+</head>
+<body>
+    
+    
+    <div class="container">
+        <div class="well" style="padding-bottom:100px">
+
+            <form class="form--vertical"> 
+                <div style="float:left">
+                    <label>Přihlašovací jméno: </label>  <input class="span3" data-bind='value: name, valueUpdate: "afterkeydown"' placeholder="Přístupové jméno" /> 
+                    
+                    <label>Heslo: </label>  <input style="margin-bottom:0px" data-bind='value: password, valueUpdate: "afterkeydown"' autocomplete="off" autofocus="autofocus" id="password" name="password" type="password" placeholder="heslo" value="">
+                    <button type="submit" class="btn" data-bind="click: login, enable: readyForLoginAttempt, visible: !loggedIn()">Login</button>
+            
+                    <button class="btn" data-bind="click: logout, visible: loggedIn">Log out</button> 
+                </div>   
+                </form> 
+                <div style="float:right; margin-top:50px;">
+                    <div class="modal hide" id="myCreateUserModal">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Vytvoření nového uživatelského účtu</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                            <label>Souhlasím s podmínkami užití:</label><input type="checkbox" data-bind="checked: agreesToTerms" />
+            
+                            <label>Přihlašovací jméno: </label>  <input class="span3" data-bind='value: name, valueUpdate: "afterkeydown"' placeholder="Přístupové jméno" /> 
+                    
+                            <label>Heslo: </label>  <input style="margin-bottom:0px" data-bind='value: password, valueUpdate: "afterkeydown"' autocomplete="off" autofocus="autofocus" id="password2" name="password" type="password" placeholder="heslo" value="">
+                            <label>Heslo znovu: </label>  <input style="margin-bottom:0px" data-bind='value: passwordForVerification, valueUpdate: "afterkeydown"' autocomplete="off" autofocus="autofocus" id="password1" name="password" type="password" placeholder="heslo" value="">
+            
+                            <label>Email: </label> <input class="span3" data-bind='value: email, valueUpdate: "afterkeydown"' placeholder="Váš email" />
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+                            <button class="btn" data-bind="click: createUser, enable: readyForCreateUserAttempt">Registuj nový účet</button>
+                        </div>
+                    </div>
+                    <a class="btn" data-bind="click: ShowCreateUserModal, enable: connected">Vytvoř nový účet</a>
+                </div>   
+            
+        </div>
+        <div class="tabbable" data-bind="if: loggedIn" style="margin-bottom: 18px;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#AllMeetingsTab" data-toggle="tab">Všechny schůze</a></li>
+          <li><a href="#MeetingTab" data-toggle="tab">Vybraná schůze: <span data-bind="text: selectedMeeting.name"></a></li>
+          <li><a href="#VotingTab" data-toggle="tab">Vybrané hlasování</a></li>
+        </ul>
+        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+            <div class="tab-pane active" id="AllMeetingsTab">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%">
+                                Název
+                            </th>
+                            <th style="width: 15%">
+                                Datum
+                            </th>
+                            <th style="width: 10%">
+                                Maximum hlasů
+                            </th>
+                            <th style="width: 25%">
+                                Počet Hlasování
+                            </th>
+                  
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: AllMeetings">
+
+                        <tr data-bind="style: { backgroundColor: $index() === $parent.selectedMeetingIndex() ? '#D9EDF7' : 'white' }">
+                            <td><span data-bind='text: name' /></td>
+                            <td><span data-bind='text: date'></span></td>
+                            <td><span data-bind='text: maximumVoteCount' /></td>
+                            <td><span data-bind='text: votingsCount'></span></td>
+                            <td><button class="btn" data-bind="click: $parent.removeMeeting">Smazat</button></td>
+                            <td><button class="btn" title="Přejít do schůze" data-bind="click: $parent.editMeeting">Přejít do schůze</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="well" >   
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newMeetingWell">
+                      Vytvoř novou schůzi
+                    </button> 
+                    <div id="newMeetingWell" class="collapse"> 
+                        <hr> 
+                        <input data-bind='value: newMeetingName, valueUpdate: "afterkeydown"' />
+                        <input type="text" class="span2" value="" id="dpicker" data-date-format="d.m.yyyy">
+                        <input data-bind='value: newMeetingMaximumVoteCount, valueUpdate: "afterkeydown"' />
+                        <button class="btn" title="Přidat schůzi" data-bind="click: CreateNewMeeting">Vytvořit schůzi</button>
+
+                    </div>
+                </div>
+            </div>
+        <div class="tab-pane" id="MeetingTab">
+            <h3 data-bind="text: selectedMeeting.name"></h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">
+                            Pořadí
+                        </th>
+                        <th style="width: 40%">
+                            O čem se hlasovalo
+                        </th>
+                        <th style="width: 25%">
+                            Datum
+                        </th>
+                        <th style="width: 12%">
+                            Pro
+                        </th>
+                        <th style="width: 12%">
+                            Proti
+                        </th>
+                        </tr>
+                    </thead>
+                <tbody data-bind="foreach: selectedMeeting.votings">
+                    <tr>
+                        <td><span data-bind='text: $index()+1'></span></td>
+                        <td><span data-bind='text: subject'></span></td>
+                        <td><span data-bind='text: enteredOn'></span></td>
+                        <td><span data-bind='text: positiveVotesCount'></span></td>
+                        <td><span data-bind='text: negativeVotesCount'></span></td>
+                        <td><button class="btn" data-bind="click: $parent.removeVoting">Smazat</button></td>
+                        <td><button class="btn" title="Detail hlasování" data-bind="click: $parent.editVoting">Přejít do hlasování</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="well" >   
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVotingWell">
+                      Vytvoř nové hlasování
+                    </button> 
+                    <div id="newVotingWell" class="collapse"> 
+                        <hr> 
+                        <input data-bind='value: newVotingSubject, valueUpdate: "afterkeydown"' />
+                        <button class="btn" title="Přidat hlasování" data-bind="click: CreateNewVoting">Vytvořit nové hlasování</button>
+
+                    </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="VotingTab">
+            <div class="well" id="votingResults">
+                <br />
+                Celkem hlasů:
+                <span data-bind="text: votesSum"></span>
+                <br />
+    
+                Hlasů pro: 
+                <span data-bind="text: positiveVotesCount"></span>    <br /> 
+                Hlasů proti: 
+                <span data-bind="text: negativeVotesCount"></span>    <br />
+                Celkem se zdrželo hlasů:
+                <span data-bind="text: votesPassiveSum"></span><br />
+                <br />
+                Pro(ze všech-i nepřítomných): 
+                <span data-bind="text: positiveVotesPercentageAll"></span> <br />
+                Pro(z přítomných):
+                <span data-bind="text: positiveVotesPercentageFromPresent"></span> <br />
+                Pro(z hlasujících):
+                <span data-bind="text: positiveVotesPercentageFromThoseWhoVoted"></span> <br />
+            </div>
+            <div class="well">
+                <h4 data-bind="text: selectedVoting.subject"></h4>
+                <table class="table table-bordered">
+                      <thead>
+                            <tr>
+                                <th style="width: 10%">
+                                    Zdržuje se
+                                </th>
+                                <th style="width: 10%">
+                                    Pro/Proti
+                                </th>
+                                <th style="width: 50%">
+                                    Vlastník
+                                </th>
+                                <th style="width: 40%">
+                                    Hlasů
+                                </th>
+                    
+                            </tr>
+                        </thead>
+                    <tbody data-bind="foreach: selectedVoting.votes">
+                        <tr>
+                            <td><input type="checkbox" data-bind="checked: passive" /></td>
+                            <td><input type="checkbox" data-bind="disable: passive, checked: how" /></td>
+                            <td><span data-bind='text: name'></span></td>
+                            <td><span data-bind='text: voteStrength'></span></td>
+                            <td><button class="btn" data-bind="click: $parent.removeVote">Smazat</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="well" >   
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVoteWell">
+                      Vytvoř hlasujícího
+                    </button> 
+                    <div id="newVoteWell" class="collapse"> 
+                        <hr> 
+                        <input data-bind='value: newVoteName, valueUpdate: "afterkeydown"' />
+                        <input data-bind='value: newVoteStrength, valueUpdate: "afterkeydown"' />
+                        <button class="btn" title="Přidat hlasujícího" data-bind="click: addNewVote">Vytvořit nový hlas</button>
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        </div>
+    </div>
+    </div>
+
+        
+    
+    <div class="well">
+        <button class="btn" data-bind="click: disconnect, enable: connected">Disconnect</button> 
+
+        <div id="WebsocketsLog" >  
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="js/bootstrap-scrollspy.js"></script>
+<script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+</html>

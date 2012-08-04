@@ -1,0 +1,136 @@
+﻿  body, input { font-family: arial; font-size: 14px; }
+
+.grid { margin-bottom: 1em; width: 90em; border: 1px solid silver; background-color:White; }
+
+.grid th { text-align:left; background-color: Black; color:White; }
+
+.grid td, th { padding: 0.4em; vertical-align: top;}
+
+.grid tr.odd { background-color: #DDD; }
+
+
+
+li { list-style-type: none; margin-left: 0; }
+
+ul { margin: 0;padding: 0;}
+
+
+
+fieldset {
+
+	margin-bottom: 1em; width: 37em; border: 1px solid silver; background-color:White;
+
+	padding: 1.4em;
+
+}
+
+
+
+fieldset legend {
+
+	font-size: 15px;
+
+	font-weight: bold;
+
+}
+
+
+
+fieldset label 
+
+{
+
+	float: left;
+
+	width: 6em;
+
+	font-weight: bold;
+
+	font-size: 13px;
+
+}
+
+
+
+input[type="text"] { width: 300px; }
+
+#container{
+	border:5px solid grey;
+	width:800px;
+	margin:0 auto;
+	padding:10px;
+}
+#chatLog{
+	padding:5px;
+	border:1px solid black;
+}
+#chatLog p {
+	margin:0;
+}
+#WebsocketsLog{
+	padding:5px;
+	border:1px solid black;
+}
+#WebsocketsLog p {
+	margin:0;
+}
+
+.event {
+	color:#999;
+}
+.warning{
+	font-weight:bold;
+	color:#CCC;
+}
+
+.button:hover {
+    text-decoration: none;
+    color: white;
+    background: #666;
+}
+.button:active {
+    background: silver;
+}
+.button {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: 
+    #333;
+    background-image: none;
+    background-origin: padding-box;
+    border-bottom-color: 
+    white;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-left-color: 
+    white;
+    border-left-style: none;
+    border-left-width: 0px;
+    border-right-color: 
+    white;
+    border-right-style: none;
+    border-right-width: 0px;
+    border-top-color: 
+    white;
+    border-top-style: none;
+    border-top-width: 0px;
+    color: 
+    white;
+    cursor: pointer;
+    display: block;
+    font-weight: 200;
+    margin-bottom: 14px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    outline-color: 
+    white;
+    outline-style: none;
+    outline-width: 0px;
+    padding: 17px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+
+}
