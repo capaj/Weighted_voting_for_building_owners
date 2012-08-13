@@ -10,104 +10,22 @@ using Raven.Client;
 using Raven.Client.Connection;
 using Raven.Client.Embedded;
 using System.Security.Cryptography.X509Certificates;
-
+using Weighted_voting_for_building_owners;
 
 namespace OwnersVotingServer
 {
-    enum Roles
-    {
-        Normal, Admin
-    }
-
-    class User
-    {
-        public string Id { get; set; }
-        public string nick { get; set; }
-        public string hashedPwrd { get; set; }
-        public string email { get; set; }
-        public Roles role { get; set; }
-        public ClientViewModel VM { get; set; }
-        public IWebSocketConnection connection { get; set; }
-
-    }
-
-    class OwnerVotingsServer
-    {
-        public List<User> allUsers { get; set; }
-        public List<IWebSocketConnection> allSockets { get; set; }
-        public List<CreateUserRequest> CURequestHistory { get; set; }
-        public EmbeddableDocumentStore documentStore { get; set; }
-
-        public OwnerVotingsServer(IDocumentStore docStore)
-        {
-            documentStore = (EmbeddableDocumentStore)docStore;
-            allSockets = new List<IWebSocketConnection>();
-            CURequestHistory = new List<CreateUserRequest>();
-            using (var session = documentStore.OpenSession())
-            {
-                allUsers = session.Query<User>().ToList();
-
-            }
-        }
-
-        public string AddNewlyCreatedUser(User newUser)
-        {
-            using (var session = documentStore.OpenSession())
-            {
-                session.Store(newUser);
-                session.SaveChanges();
-            }
-            allUsers.Add(newUser);
-            return newUser.Id;
-        }
-
-        public User FindUserByNickAndPWDhash(User user)
-        {
-            var ourUser = allUsers.Find(x => x.nick == user.nick && x.hashedPwrd == user.hashedPwrd);     //simple authentication
-            return ourUser;
-        }
-
-        public User FindUserByNick(User user)
-        {
-            var ourUser = allUsers.Find(x => x.nick == user.nick);     //simple check if the user already exists
-            return ourUser;
-        }
-    }
-
     static class Program
     {
-
-
-
         static void Main(string[] args)
         {
             FleckLog.Level = LogLevel.Debug;
             var server = new WebSocketServer("ws://localhost:8181");
 
-            //bordel
+            //User pok = testData.GetTestUserData();    // some data for testing the app
 
-            Vote mothersVote = new Vote { how = true, passive = false, name = "Paedr. Miroslava Špácová", voteStrength = 55 };
-            Vote pazoursVote = new Vote { how = false, passive = false, name = "Pazour", voteStrength = 87 };
-            List<Vote> votesList = new List<Vote>();
-            votesList.Add(mothersVote);
-            votesList.Add(pazoursVote);
-            Voting firstVoting = new Voting { subject = "Prvni testovaci hlasovani", votes = votesList };
-            Voting secondVoting = new Voting { subject = "Druhe testovaci hlasovani", votes = new List<Vote> { mothersVote } };
-
-            OwnersMeeting firstMeeting = new OwnersMeeting { name = "Prvni testovaci schuze", date = DateTime.Today.AddDays(-30), maximumVoteCount = 240, votings = new List<Voting> { firstVoting } };
-            OwnersMeeting secondMeeting = new OwnersMeeting { name = "Druha testovaci schuze", date = DateTime.Now, maximumVoteCount = 220, votings = new List<Voting> { secondVoting } };
-
-            ClientViewModel jirisVM = new ClientViewModel { AllMeetings = new List<OwnersMeeting> { firstMeeting, secondMeeting } };
-
-
-            User myTest = new User { nick = "Jiri", hashedPwrd = "a9993e364706816aba3e25717850c26c9cd0d89d", role = Roles.Admin, VM = jirisVM };
-            //konec bordelu
-
-            string jsonStr = JsonConvert.SerializeObject(myTest);
             var dStore = new EmbeddableDocumentStore { DataDirectory = "Data", }.Initialize();
             dStore.Initialize();
             var OVserver = new OwnerVotingsServer(dStore);
-            OVserver.allUsers.Add(myTest);
 
             server.Start(socket =>
             {
@@ -187,7 +105,8 @@ namespace OwnersVotingServer
                             break;
                         case "logout":
                             Console.WriteLine("logout request");
-                            User user = OVserver.FindUserByNickAndPWDhash(receivedObj.user);
+                            User heWhoWantsToLogout = JsonConvert.DeserializeObject<User>(receivedObj.user.ToString());
+                            User user = OVserver.FindUserByNickAndPWDhash(heWhoWantsToLogout);
 
                             if (user != null)
                             {

@@ -92,6 +92,12 @@ $(function () {
 
     var VM = ko.mapping.fromJS(initModel);
 
+    //debug help
+    VM.AllMeetings.subscribe(function () {
+        console.log(VM.AllMeetings());
+    })
+
+
     VM.ShowCreateUserModal = function () {
         $('#myCreateUserModal').modal('show')
     };
@@ -188,7 +194,11 @@ $(function () {
             if (VM.selectedVotingIndex() === null) {
                 return noVoting[property];
             } else {
-                return allV[VM.selectedVotingIndex()][property]();
+                if (allV[VM.selectedVotingIndex()]) {
+                    return allV[VM.selectedVotingIndex()][property]();
+                } else {
+                    return noVoting[property];
+                }
             }
         }
     }
