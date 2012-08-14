@@ -31,6 +31,8 @@ namespace OwnersVotingServer
             {
                 socket.OnOpen = () =>
                 {
+                    socket.ConnectionInfo.Cookies["user"] = "anonymous";
+                    
                     Console.WriteLine("Opened connection from IP: {0}", socket.ConnectionInfo.ClientIpAddress);
                     OVserver.allSockets.Add(socket);
 
@@ -83,13 +85,15 @@ namespace OwnersVotingServer
 
                             break;
                         case "login":
-                            Console.WriteLine("Login request");
                             User heWhoWantsToLogin = JsonConvert.DeserializeObject<User>(receivedObj.user.ToString());
                             var ourUser = OVserver.FindUserByNickAndPWDhash(heWhoWantsToLogin);
+                            Console.WriteLine("Login request from {0}", heWhoWantsToLogin.nick);
                             //var ourUser = myTest; // just for debug
                             if (ourUser != null)
                             {
                                 //login successful
+                                socket.ConnectionInfo.Cookies["user"] = heWhoWantsToLogin.nick;
+
                                 ourUser.connection = socket;
                                 Console.WriteLine("Login granted, sending the model");
                                 //ClientViewModel ConnectedUserVM = 
@@ -105,8 +109,9 @@ namespace OwnersVotingServer
                             break;
                         case "logout":
                             Console.WriteLine("logout request");
-                            User heWhoWantsToLogout = JsonConvert.DeserializeObject<User>(receivedObj.user.ToString());
-                            User user = OVserver.FindUserByNickAndPWDhash(heWhoWantsToLogout);
+                            //User heWhoWantsToLogout = JsonConvert.DeserializeObject<User>(receivedObj.user.ToString());
+
+                            User user = OVserver.FindUserByNick(socket.ConnectionInfo.Cookies["user"]);
 
                             if (user != null)
                             {

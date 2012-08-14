@@ -69,6 +69,12 @@ namespace Weighted_voting_for_building_owners
             var ourUser = allUsers.Find(x => x.nick == user.nick);     //simple check if the user already exists
             return ourUser;
         }
+
+        public User FindUserByNick(string nickName)
+        {
+            var ourUser = allUsers.Find(x => x.nick == nickName);     //simple check if the user already exists
+            return ourUser;
+        }
     }
    
 }
