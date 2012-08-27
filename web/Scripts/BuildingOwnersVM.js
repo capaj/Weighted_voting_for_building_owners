@@ -16,6 +16,13 @@ function GetDateFromString(strDate) {
     return new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
 }
 
+function voteCount(votesToCount) {
+    var ret = 0;
+    ko.utils.arrayForEach(votesToCount, function (vote) {
+        ret = ret + parseInt(vote.voteStrength());
+    });
+    return ret;
+}
 
 function Meeting(meeting) {
     if (meeting.date instanceof Date) {
@@ -34,17 +41,31 @@ function Meeting(meeting) {
         }
     );
 
-    this.votings = votingsBuffer;
+    this.votings = ko.observableArray(votingsBuffer);
     return meeting;
 }
 
 function Voting(voting) {
+    voting.votes = ko.mapping.fromJS(voting.votes);
+
     voting.enteredOn = GetDateStrFromJsonDate(voting.enteredOn);
     voting.positiveVotesCount = ko.computed(function () {
-        return voting.votes.length;
+        var positiveVotesOnOne = ko.utils.arrayFilter(voting.votes(),
+            function (item) {
+                return item.how() && !(item.passive());
+            }
+        );
+
+        return voteCount(positiveVotesOnOne);
     });
     voting.negativeVotesCount = ko.computed(function () {
-        return voting.votes.length;
+        var negativeVotesOnOne = ko.utils.arrayFilter(voting.votes(),
+            function (item) {
+                return !(item.how()) && !(item.passive());
+            }
+        );
+
+        return voteCount(negativeVotesOnOne);
     });
     return voting;
 }
@@ -222,22 +243,17 @@ $(function () {
     );
 
     VM.votesSum = ko.computed(function () {
-        ret = 0
-        ko.utils.arrayForEach(VM.selectedVoting.votes(), function (item) {
-            ret = ret + parseInt(item.voteStrength());
-        });
-
-        return ret;
+        return voteCount(VM.selectedVoting.votes());
     });
 
     VM.votesPassiveSum = ko.computed(function () {
-        ret = 0
+        var passiveVotes = ko.observableArray();
         ko.utils.arrayForEach(VM.selectedVoting.votes(), function (item) {
             if (item.passive()) {
-                ret = ret + parseInt(item.voteStrength());
+                passiveVotes.push(item)
             }
         });
-        return ret;
+        return voteCount(passiveVotes());
     });
 
     VM.positiveVotes = ko.computed(function () {
@@ -367,6 +383,8 @@ $(function () {
     VM.editMeeting = function (meeting) {
         var index = VM.AllMeetings.indexOf(meeting);
         VM.selectedMeetingIndex(index);
+
+        $('li.active').next().find('a[data-toggle="tab"]').click();     // this ensures that the tab with meeting will be shown
     }
 
     VM.editVoting = function (voting) {
@@ -376,6 +394,7 @@ $(function () {
         //VM.selectedVoting.subject(voting.subject())
         //VM.selectedVoting.enteredOn(voting.enteredOn())
         
+        $('li.active').next().find('a[data-toggle="tab"]').click();     // this ensures that the tab with meeting will be shown
     }
 
     if (!("WebSocket" in window)) {

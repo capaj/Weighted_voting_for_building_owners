@@ -59,8 +59,8 @@
         <div class="tabbable" data-bind="if: loggedIn" style="margin-bottom: 18px;">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#AllMeetingsTab" data-toggle="tab">Všechny schůze</a></li>
-          <li><a href="#MeetingTab" data-toggle="tab">Vybraná schůze: <span data-bind="text: selectedMeeting.name"></a></li>
-          <li><a href="#VotingTab" data-toggle="tab">Vybrané hlasování</a></li>
+          <li><a href="#MeetingTab" data-toggle="tab">Vybraná schůze: <span data-bind="text: selectedMeeting.name"/></a></li>
+          <li><a href="#VotingTab" data-toggle="tab">Vybrané hlasování: <span data-bind="text: selectedVoting.subject"/></a></li>
         </ul>
         <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
             <div class="tab-pane active" id="AllMeetingsTab">
@@ -131,7 +131,7 @@
                         </tr>
                     </thead>
                 <tbody data-bind="foreach: selectedMeeting.votings">
-                    <tr>
+                    <tr data-bind="style: { backgroundColor: $index() === $parent.selectedVotingIndex() ? '#D9EDF7' : 'white' }">
                         <td><span data-bind='text: $index()+1'></span></td>
                         <td><span data-bind='text: subject'></span></td>
                         <td><span data-bind='text: enteredOn'></span></td>
