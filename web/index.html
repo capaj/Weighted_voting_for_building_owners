@@ -143,13 +143,13 @@
                 </tbody>
             </table>
             <div class="well" >   
-                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVotingWell">
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVotingWell" data-bind="enable: isMeetingSelected">
                       Vytvoř nové hlasování
                     </button> 
                     <div id="newVotingWell" class="collapse"> 
                         <hr> 
                         <input data-bind='value: newVotingSubject, valueUpdate: "afterkeydown"' />
-                        <button class="btn" title="Přidat hlasování" data-bind="click: CreateNewVoting">Vytvořit nové hlasování</button>
+                        <button class="btn" title="Přidat hlasování" data-bind="click: CreateNewVoting, enable: isMeetingSelected">Vytvořit nové hlasování</button>
 
                     </div>
             </div>
@@ -162,9 +162,9 @@
                 <br />
     
                 Hlasů pro: 
-                <span data-bind="text: positiveVotesCount"></span>    <br /> 
+                <span data-bind="text: positiveVotesCountOnSelected"></span>    <br /> 
                 Hlasů proti: 
-                <span data-bind="text: negativeVotesCount"></span>    <br />
+                <span data-bind="text: negativeVotesCountOnSelected"></span>    <br />
                 Celkem se zdrželo hlasů:
                 <span data-bind="text: votesPassiveSum"></span><br />
                 <br />
@@ -206,14 +206,14 @@
                     </tbody>
                 </table>
                 <div class="well" >   
-                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVoteWell">
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#newVoteWell" data-bind="enable: isVotingSelected">
                       Vytvoř hlasujícího
                     </button> 
                     <div id="newVoteWell" class="collapse"> 
                         <hr> 
                         <input data-bind='value: newVoteName, valueUpdate: "afterkeydown"' />
                         <input data-bind='value: newVoteStrength, valueUpdate: "afterkeydown"' />
-                        <button class="btn" title="Přidat hlasujícího" data-bind="click: addNewVote">Vytvořit nový hlas</button>
+                        <button class="btn" title="Přidat hlasujícího" data-bind="click: CreateNewVote, enable: isVotingSelected">Vytvořit nový hlas</button>
 
                     </div>
                 </div>

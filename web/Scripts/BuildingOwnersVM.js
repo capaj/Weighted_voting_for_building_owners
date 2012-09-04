@@ -50,7 +50,8 @@ function Voting(voting) {
 
     voting.enteredOn = GetDateStrFromJsonDate(voting.enteredOn);
     voting.positiveVotesCount = ko.computed(function () {
-        var positiveVotesOnOne = ko.utils.arrayFilter(voting.votes(),
+        var votesToFilter = voting.votes();
+        var positiveVotesOnOne = ko.utils.arrayFilter(votesToFilter,
             function (item) {
                 return item.how() && !(item.passive());
             }
@@ -59,7 +60,8 @@ function Voting(voting) {
         return voteCount(positiveVotesOnOne);
     });
     voting.negativeVotesCount = ko.computed(function () {
-        var negativeVotesOnOne = ko.utils.arrayFilter(voting.votes(),
+        var votesToFilter = voting.votes();
+        var negativeVotesOnOne = ko.utils.arrayFilter(votesToFilter,
             function (item) {
                 return !(item.how()) && !(item.passive());
             }
@@ -108,7 +110,7 @@ $(function () {
         newVotingSubject: "",
         //newVote
         newVoteName: "",
-        newVoteStrength: 0,
+        newVoteStrength: 0
     };
 
     var VM = ko.mapping.fromJS(initModel);
@@ -155,7 +157,7 @@ $(function () {
         VM.AllMeetings()[VM.selectedMeetingIndex()].votings.push(ko.mapping.fromJS(newVoting));
     };
 
-    VM.addNewVote = function () {
+    VM.CreateNewVote = function () {
         var newVote =
             {
                 name: VM.newVoteName(),
@@ -295,7 +297,7 @@ $(function () {
         return ret;
     });
 
-    VM.positiveVotesCount = ko.computed(function () {
+    VM.positiveVotesCountOnSelected = ko.computed(function () {
         var ret = 0;
         ko.utils.arrayForEach(VM.positiveVotes(), function (item) {
             ret = ret + parseInt(item.voteStrength());
@@ -303,7 +305,7 @@ $(function () {
         return ret;
     });
 
-    VM.negativeVotesCount = ko.computed(function () {
+    VM.negativeVotesCountOnSelected = ko.computed(function () {
         var ret = 0;
         ko.utils.arrayForEach(VM.negativeVotes(), function (item) {
             ret = ret + parseInt(item.voteStrength());
@@ -314,8 +316,8 @@ $(function () {
     VM.positiveVotesPercentageAll = ko.computed(function () {
         if (VM.selectedMeeting.maximumVoteCount) {
 
-            if (parseInt(VM.selectedMeeting.maximumVoteCount()) >= VM.positiveVotesCount()) {
-                return (VM.positiveVotesCount() / parseInt(VM.selectedMeeting.maximumVoteCount())) * 100;
+            if (parseInt(VM.selectedMeeting.maximumVoteCount()) >= VM.positiveVotesCountOnSelected()) {
+                return (VM.positiveVotesCountOnSelected() / parseInt(VM.selectedMeeting.maximumVoteCount())) * 100;
             } else {
                 return "Chyba: Celkem hlasů je méně než hlasů vybraných";
             }
@@ -325,8 +327,8 @@ $(function () {
     VM.positiveVotesPercentageFromThoseWhoVoted = ko.computed(function () {
         var activeVotesCount = parseInt(VM.notPassiveVotesCount());
         if (VM.notPassiveVotes().length > 0) {
-            if (activeVotesCount >= VM.positiveVotesCount()) {
-                return (VM.positiveVotesCount() / activeVotesCount) * 100;
+            if (activeVotesCount >= VM.positiveVotesCountOnSelected()) {
+                return (VM.positiveVotesCountOnSelected() / activeVotesCount) * 100;
             } else {
                 return "Chyba: Celkem hlasů je méně než hlasů hlasujících pro";
             }
@@ -337,8 +339,8 @@ $(function () {
 
     VM.positiveVotesPercentageFromPresent = ko.computed(function () {
         if (VM.notPassiveVotes().length > 0) {
-            if (parseInt(VM.votesSum()) >= VM.positiveVotesCount()) {
-                return (VM.positiveVotesCount() / parseInt(VM.votesSum())) * 100;
+            if (parseInt(VM.votesSum()) >= VM.positiveVotesCountOnSelected()) {
+                return (VM.positiveVotesCountOnSelected() / parseInt(VM.votesSum())) * 100;
             } else {
                 return "Chyba";
             }
@@ -533,6 +535,15 @@ $(function () {
                 log("User has mispelled his password");
             }
         }
+
+        VM.isVotingSelected = ko.computed(function () {
+            return (VM.selectedVotingIndex() !== null);
+        });
+
+        VM.isMeetingSelected = ko.computed(function () {
+            return (VM.selectedMeetingIndex() !== null);
+        });
+        
         ko.applyBindings(VM);
 
        
