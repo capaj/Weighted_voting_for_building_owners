@@ -24,55 +24,75 @@ function voteCount(votesToCount) {
     return ret;
 }
 
-function Meeting(meeting) {
-    if (meeting.date instanceof Date) {
-        meeting.date = GetDateStrFromDate(meeting.date);
-    } else {
-        meeting.date = GetDateStrFromJsonDate(meeting.date);
-    }
-    meeting.votingsCount = ko.computed(function () {
-        return meeting.votings.length;
-    });
-
-    var votingsBuffer = [];
-    $.each(meeting.votings,
-        function (key, voting) {
-            votingsBuffer.push(new Voting(voting));
-        }
-    );
-
-    this.votings = ko.observableArray(votingsBuffer);
-    return meeting;
-}
-
-function Voting(voting) {
-    voting.votes = ko.mapping.fromJS(voting.votes);
-
-    voting.enteredOn = GetDateStrFromJsonDate(voting.enteredOn);
-    voting.positiveVotesCount = ko.computed(function () {
-        var votesToFilter = voting.votes();
-        var positiveVotesOnOne = ko.utils.arrayFilter(votesToFilter,
-            function (item) {
-                return item.how() && !(item.passive());
-            }
-        );
-
-        return voteCount(positiveVotesOnOne);
-    });
-    voting.negativeVotesCount = ko.computed(function () {
-        var votesToFilter = voting.votes();
-        var negativeVotesOnOne = ko.utils.arrayFilter(votesToFilter,
-            function (item) {
-                return !(item.how()) && !(item.passive());
-            }
-        );
-
-        return voteCount(negativeVotesOnOne);
-    });
-    return voting;
-}
-
 $(function () {
+
+    function Meeting(meeting, mIndex) {
+        if (meeting.date instanceof Date) {
+            meeting.date = GetDateStrFromDate(meeting.date);
+        } else {
+            meeting.date = GetDateStrFromJsonDate(meeting.date);
+        }
+        meeting.votingsCount = ko.computed(function () {
+            return meeting.votings.length;
+        });
+
+        $.each(meeting.votings,
+            function (key, voting) {
+                enhanceToVoting(voting, mIndex, key);
+            }
+        );
+
+        return meeting;
+    }
+
+    function Voting(voting, meetingIndex, votingIndex) {
+        enhanceToVoting(voting, meetingIndex, votingIndex);
+        return voting;
+    }
+
+    function enhanceToVoting(voting, meetingIndex, votingIndex) {
+        voting.votes = ko.mapping.fromJS(voting.votes);
+
+        voting.enteredOn = GetDateStrFromJsonDate(voting.enteredOn);
+        voting.positiveVotesCount = ko.computed(function () {
+            //var votesToFilter = voting.votes();
+            var votesToFilter = [];
+            if (VM.AllMeetings().length > meetingIndex) {
+                if (VM.AllMeetings()[meetingIndex].votings().length > votingIndex) {
+
+                    votesToFilter = VM.AllMeetings()[meetingIndex].votings()[votingIndex].votes();
+                }
+
+            }
+           
+            var positiveVotesOnOne = ko.utils.arrayFilter(votesToFilter,
+                function (item) {
+                    return item.how() && !(item.passive());
+                }
+            );
+
+            return voteCount(positiveVotesOnOne);
+        });
+        voting.negativeVotesCount = ko.computed(function () {
+            //var votesToFilter = voting.votes();
+            var votesToFilter = [];
+            if (VM.AllMeetings().length > meetingIndex) {
+                if (VM.AllMeetings()[meetingIndex].votings().length > votingIndex) {
+
+                    votesToFilter = VM.AllMeetings()[meetingIndex].votings()[votingIndex].votes();
+                }
+
+            }
+            var negativeVotesOnOne = ko.utils.arrayFilter(votesToFilter,
+                function (item) {
+                    return !(item.how()) && !(item.passive());
+                }
+            );
+
+            return voteCount(negativeVotesOnOne);
+        });
+   } 
+
     var noMeeting = {
         name: "nevybrána žádná schůze",
         date: "",
@@ -138,7 +158,7 @@ $(function () {
                     date: GetDateFromString($('#dpicker').attr("value")),
                     maximumVoteCount: VM.newMeetingMaximumVoteCount(),
                     votings: []
-                }
+                }, VM.AllMeetings().length
             )
         );
         //taking care of the input fields
@@ -153,7 +173,7 @@ $(function () {
                 subject: VM.newVotingSubject(),
                 enteredOn: (new Date()).toJSON(),
                 votes: []
-            });
+            }, VM.selectedMeetingIndex(), VM.AllMeetings()[VM.selectedMeetingIndex()].votings().length);
         VM.AllMeetings()[VM.selectedMeetingIndex()].votings.push(ko.mapping.fromJS(newVoting));
     };
 
@@ -428,7 +448,7 @@ $(function () {
                         VM.loggedIn(true);
                         $.each(msgfromServer.body.AllMeetings,
                             function (key, meeting) {
-                                VM.addMeeting(new Meeting(meeting));
+                                VM.addMeeting(new Meeting(meeting, key));
                             }
 
                         );
