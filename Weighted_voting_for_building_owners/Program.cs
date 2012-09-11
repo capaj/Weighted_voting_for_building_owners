@@ -95,7 +95,7 @@ namespace OwnersVotingServer
                                 socket.ConnectionInfo.Cookies["user"] = heWhoWantsToLogin.nick;
 
                                 ourUser.connection = socket;
-                                Console.WriteLine("Login granted, sending the model");
+                                Console.WriteLine("Login granted to {0}, sending the model", heWhoWantsToLogin.nick);
                                 //ClientViewModel ConnectedUserVM = 
                                 var msg = new WebsocketMessage { msgType = clientMsgType + "_response_succes", body = ourUser.VM };
                                 msg.Send(socket);
